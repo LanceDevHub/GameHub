@@ -1,4 +1,5 @@
 import { Grid, GridItem, Show, useBreakpointValue } from "@chakra-ui/react";
+import NavBar from "./components/NavBar";
 
 function App() {
   // Checks if we on "bigger devices" -> lg or "mobile" -> base
@@ -8,8 +9,8 @@ function App() {
     <Grid
       templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
     >
-      <GridItem area="nav" bg="coral">
-        Nav
+      <GridItem area="nav" bg="white">
+        <NavBar></NavBar>
       </GridItem>
       <Show when={isLg}>
         <GridItem area="aside" bg="gold">
