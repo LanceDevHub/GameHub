@@ -1,15 +1,12 @@
-import { Button, HStack, Image, Text, Box } from "@chakra-ui/react";
+import { HStack, Image, Text } from "@chakra-ui/react";
 import logo from "../assets/gamehub_logo.webp";
-import { useColorMode } from "@/components/ui/color-mode";
+import ColorModeSwitch from "./ColorModeSwitch";
 
 const NavBar = () => {
-  const { toggleColorMode } = useColorMode();
-
   return (
-    <HStack>
+    <HStack justify="space-between" paddingRight="10px" paddingLeft="15px">
       <Image src={logo} boxSize="80px"></Image>
-      <Text>NavBar</Text>
-      <Button onClick={toggleColorMode}>Toggle Mode</Button>
+      <ColorModeSwitch />
     </HStack>
   );
 };
