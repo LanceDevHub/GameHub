@@ -13,7 +13,7 @@ const GameCard = ({ game }: Props) => {
   return (
     // When using overflow hidden it means that we can round up the
     // upper borders of the picture beacuse its to big for bordering otherwise
-    <Card.Root borderRadius={10} overflow="hidden">
+    <Card.Root borderRadius={10} overflow="hidden" width="350px">
       <Image src={getCroppedImageUrl(game.background_image)}></Image>
       <Card.Body>
         <Heading fontSize="2xl">{game.name}</Heading>
