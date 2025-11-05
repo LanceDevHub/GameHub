@@ -1,6 +1,7 @@
 import { Grid, GridItem, Show, useBreakpointValue } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
+import GenreList from "./components/GenreList";
 
 function App() {
   // Checks if we on "bigger devices" -> lg or "mobile" -> base
@@ -14,7 +15,9 @@ function App() {
         <NavBar></NavBar>
       </GridItem>
       <Show when={isLg}>
-        <GridItem area="aside">Aside</GridItem>
+        <GridItem area="aside">
+          <GenreList></GenreList>
+        </GridItem>
       </Show>
       <GridItem area="main">
         <GameGrid />
