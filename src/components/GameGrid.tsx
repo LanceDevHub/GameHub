@@ -16,6 +16,8 @@ const GameGrid = () => {
         columnGap="4"
         rowGap="10"
         padding="10px"
+        justifyItems="center"
+        alignItems="center"
       >
         {isLoading &&
           skeletons.map((s) => (
