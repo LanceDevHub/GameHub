@@ -1,10 +1,19 @@
 import useGenres from "@/hooks/useGenres";
 import getCroppedImageUrl from "@/services/image-url";
-import { HStack, Image, List, ListItem } from "@chakra-ui/react";
+import { HStack, Image, List, ListItem, Spinner } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 
 const GenreList = () => {
-  const { data } = useGenres();
+  const { data, isLoading, error } = useGenres();
+
+  if (error) return null;
+
+  if (isLoading)
+    return (
+      <HStack alignSelf="center" padding={10}>
+        <Spinner padding={10} />
+      </HStack>
+    );
 
   return (
     <List.Root variant="plain">
