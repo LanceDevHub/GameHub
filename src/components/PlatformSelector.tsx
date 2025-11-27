@@ -14,9 +14,9 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
 
   return (
     <Menu.Root>
-      <Menu.Trigger>
+      <Menu.Trigger asChild>
         <Button variant="outline" size="sm">
-          {selectedPlatform ? selectedPlatform.name : "Select Platform"}
+          {selectedPlatform?.name || "Select Platform"}
         </Button>
       </Menu.Trigger>
       <Portal>
@@ -26,7 +26,12 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
               <Menu.Item
                 key={platform.id}
                 value={platform.name}
-                onClick={() => onSelectPlatform(platform)}
+                onClick={() => {
+                  platform.id === 2
+                    ? () => console.log("Playstation API currently not working") // Playstation API currently not working
+                    : onSelectPlatform(platform);
+                }}
+                disabled={platform.id === 2 ? true : false} // Playstation API currently not working => disabled it
               >
                 {platform.name}
               </Menu.Item>
