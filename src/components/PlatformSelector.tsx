@@ -1,6 +1,7 @@
 import type { Platform } from "@/hooks/useGames";
 import usePlatforms from "@/hooks/usePlatforms";
 import { Button, Menu, Portal } from "@chakra-ui/react";
+import { HiCog } from "react-icons/hi";
 
 interface Props {
   onSelectPlatform: (platform: Platform) => void;
@@ -15,7 +16,8 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
   return (
     <Menu.Root>
       <Menu.Trigger asChild>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" width={170}>
+          <HiCog />
           {selectedPlatform?.name || "Select Platform"}
         </Button>
       </Menu.Trigger>
