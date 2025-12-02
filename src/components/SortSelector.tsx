@@ -9,8 +9,8 @@ const SortSelector = () => {
   return (
     <Menu.Root>
       <Menu.Trigger asChild>
-        <Button variant="outline" size="sm" width={125}>
-          <HiSortAscending /> Sort
+        <Button variant="outline" size="sm" width={160}>
+          <HiSortAscending /> Sort by: {value === "" ? "" : value}
         </Button>
       </Menu.Trigger>
       <Portal>
@@ -35,12 +35,12 @@ const SortSelector = () => {
 };
 
 const items = [
-  { label: "Relevance", value: "relev" },
-  { label: "Date added", value: "date" },
-  { label: "Name", value: "name" },
-  { label: "Release date", value: "release" },
-  { label: "Popularity", value: "pop" },
-  { label: "Average rating", value: "avg" },
+  { label: "Relevance", value: "Relevance" },
+  { label: "Date added", value: "Date" },
+  { label: "Name", value: "Name" },
+  { label: "Release date", value: "Release" },
+  { label: "Popularity", value: "Popularity" },
+  { label: "Average rating", value: "Avg Rating" },
 ];
 
 export default SortSelector;
