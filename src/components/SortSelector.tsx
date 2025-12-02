@@ -4,24 +4,39 @@ import { Button, Menu, MenuItem, Portal } from "@chakra-ui/react";
 import { useState } from "react";
 import { HiSortAscending } from "react-icons/hi";
 
-const SortSelector = () => {
-  const [value, setValue] = useState("");
+interface Props {
+  onSelectSortOrder: (sortOrder: string) => void;
+  sortOrder: string;
+}
+
+const SortSelector = ({ onSelectSortOrder, sortOrder }: Props) => {
+  const currentSortOrder = sortOrders.find((order) => order.value == sortOrder);
+
   return (
     <Menu.Root>
       <Menu.Trigger asChild>
-        <Button variant="outline" size="sm" width={160}>
-          <HiSortAscending /> Sort by: {value === "" ? "" : value}
+        <Button variant="outline" size="sm" width={185}>
+          <HiSortAscending /> Sort by: {currentSortOrder?.label || "Relevance"}
         </Button>
       </Menu.Trigger>
       <Portal>
         <Menu.Positioner>
           <Menu.Content minW="10rem">
-            <Menu.RadioItemGroup
-              value={value}
-              onValueChange={(e) => setValue(e.value)}
-            >
-              {items.map((item) => (
-                <Menu.RadioItem key={item.value} value={item.value}>
+            <Menu.RadioItemGroup>
+              {sortOrders.map((item) => (
+                <Menu.RadioItem
+                  key={item.value}
+                  value={item.value}
+                  onClick={
+                    item.label === "Popularity"
+                      ? () =>
+                          console.log(
+                            "Metacritic reversed API currently not working"
+                          ) // Metacritic reversed API currently not working
+                      : () => onSelectSortOrder(item.value)
+                  }
+                  disabled={item.label === "Popularity" ? true : false} // Metacritic reversed "-" API currently not working => disabled it
+                >
                   {item.label}
                   <Menu.ItemIndicator />
                 </Menu.RadioItem>
@@ -34,13 +49,13 @@ const SortSelector = () => {
   );
 };
 
-const items = [
-  { label: "Relevance", value: "Relevance" },
-  { label: "Date added", value: "Date" },
-  { label: "Name", value: "Name" },
-  { label: "Release date", value: "Release" },
-  { label: "Popularity", value: "Popularity" },
-  { label: "Average rating", value: "Avg Rating" },
+const sortOrders = [
+  { label: "Relevance", value: "" },
+  { label: "Date added", value: "-added" },
+  { label: "Name", value: "name" },
+  { label: "Release date", value: "-released" },
+  { label: "Popularity", value: "metacritic" },
+  { label: "Average rating", value: "rating" },
 ];
 
 export default SortSelector;
