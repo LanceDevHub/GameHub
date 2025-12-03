@@ -13,7 +13,7 @@ const GameGrid = ({ gameQuery }: Props) => {
   const { data = [], error, isLoading } = useGames(gameQuery);
   const skeletons = Array.from({ length: 10 });
 
-  // 1️⃣ Loading state
+  // Loading state
   if (isLoading) {
     return (
       <SimpleGrid
@@ -39,6 +39,17 @@ const GameGrid = ({ gameQuery }: Props) => {
       <Box textAlign="center" padding="20px">
         <Text fontSize="xl" color="red.500">
           {error}
+        </Text>
+      </Box>
+    );
+  }
+
+  // PlayStation filter warning
+  if (gameQuery.platform?.id === 2 && data.length === 0) {
+    return (
+      <Box textAlign="center" padding="20px">
+        <Text fontSize="xl" color="yellow.500">
+          ⚠️ The API currently does not support PlayStation platform filters.
         </Text>
       </Box>
     );
