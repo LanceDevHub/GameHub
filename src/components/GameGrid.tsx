@@ -33,7 +33,7 @@ const GameGrid = ({ gameQuery }: Props) => {
     );
   }
 
-  // 2️⃣ Error state
+  // Error state
   if (error) {
     return (
       <Box textAlign="center" padding="20px">
@@ -44,7 +44,7 @@ const GameGrid = ({ gameQuery }: Props) => {
     );
   }
 
-  // 3️⃣ No results
+  // No results
   if (!data || data.length === 0) {
     return (
       <Box textAlign="center" padding="20px">
@@ -55,7 +55,7 @@ const GameGrid = ({ gameQuery }: Props) => {
     );
   }
 
-  // 4️⃣ Normal results
+  // Normal results
   return (
     <SimpleGrid
       columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}

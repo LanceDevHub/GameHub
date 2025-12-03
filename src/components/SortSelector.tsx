@@ -25,15 +25,7 @@ const SortSelector = ({ onSelectSortOrder, sortOrder }: Props) => {
                 <Menu.RadioItem
                   key={item.value}
                   value={item.value}
-                  onClick={
-                    item.label === "Popularity"
-                      ? () =>
-                          console.log(
-                            "Metacritic reversed API currently not working"
-                          ) // Metacritic reversed API currently not working
-                      : () => onSelectSortOrder(item.value)
-                  }
-                  disabled={item.label === "Popularity" ? true : false} // Metacritic reversed "-" API currently not working => disabled it
+                  onClick={() => onSelectSortOrder(item.value)}
                 >
                   {item.label}
                   <Menu.ItemIndicator />
@@ -52,8 +44,8 @@ const sortOrders = [
   { label: "Date added", value: "-added" },
   { label: "Name", value: "name" },
   { label: "Release date", value: "-released" },
-  { label: "Popularity", value: "metacritic" },
-  { label: "Average rating", value: "rating" },
+  { label: "Popularity", value: "-metacritic" },
+  { label: "Average rating", value: "-rating" },
 ];
 
 export default SortSelector;

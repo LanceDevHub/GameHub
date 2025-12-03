@@ -30,7 +30,7 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
                 value={platform.name}
                 onClick={() => {
                   platform.id === 2
-                    ? () => console.log("Playstation API currently not working") // Playstation API currently not working
+                    ? onSelectPlatform(platform) // Playstation API currently not working
                     : onSelectPlatform(platform);
                 }}
                 disabled={platform.id === 2 ? true : false} // Playstation API currently not working => disabled it
