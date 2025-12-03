@@ -5,20 +5,21 @@ import {
   FaApple,
   FaLinux,
   FaAndroid,
+  FaGamepad,
 } from "react-icons/fa";
 import { MdPhoneIphone } from "react-icons/md";
-import { SiNintendo } from "react-icons/si";
+import { SiNintendo, SiSega } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
-import type { Platform } from "@/hooks/useGames";
 import { HStack, Icon, Text } from "@chakra-ui/react";
+import type { Platform } from "@/hooks/useGames";
 import type { IconType } from "react-icons";
 
 interface Props {
-  platforms?: Platform[]; // optional
+  platforms?: Platform[];
 }
 
 const PlatformIconList = ({ platforms = [] }: Props) => {
-  const iconMap: { [key: string]: IconType } = {
+  const iconMap: Record<string, IconType> = {
     pc: FaWindows,
     playstation: FaPlaystation,
     xbox: FaXbox,
@@ -28,10 +29,16 @@ const PlatformIconList = ({ platforms = [] }: Props) => {
     android: FaAndroid,
     ios: MdPhoneIphone,
     web: BsGlobe,
+    sega: SiSega,
+    "neo-geo": FaGamepad,
+    "game-boy-advance": FaGamepad,
+    "atari-2600": FaGamepad,
+    "commodore-amiga": FaGamepad,
+    "3do": FaGamepad,
+    "sega-saturn": SiSega,
   };
 
   if (platforms.length === 0) {
-    // always return a valid node
     return (
       <HStack>
         <Text fontSize="sm" color="gray.400">
@@ -45,7 +52,6 @@ const PlatformIconList = ({ platforms = [] }: Props) => {
     <HStack marginY={1}>
       {platforms.map((platform) => {
         const IconComponent = iconMap[platform.slug];
-        // fallback to a globe if slug not in map
         return (
           <Icon
             key={platform.id}

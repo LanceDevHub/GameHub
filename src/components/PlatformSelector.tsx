@@ -28,11 +28,7 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
               <Menu.Item
                 key={platform.id}
                 value={platform.name}
-                onClick={() => {
-                  platform.id === 2
-                    ? onSelectPlatform(platform) // Playstation API currently not working
-                    : onSelectPlatform(platform);
-                }}
+                onClick={() => onSelectPlatform(platform)}
                 disabled={platform.id === 2 ? true : false} // Playstation API currently not working => disabled it
               >
                 {platform.name}

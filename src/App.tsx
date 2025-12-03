@@ -22,10 +22,14 @@ export interface GameQuery {
 }
 
 function App() {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+  const [gameQuery, setGameQuery] = useState<GameQuery>({
+    genre: null,
+    platform: null,
+    sortOrder: "",
+    searchText: "",
+  });
 
-  // Checks if we on "bigger devices" -> lg or "mobile" -> base
-  const isLg = useBreakpointValue({ base: false, lg: true }); // true if lg or above
+  const isLg = useBreakpointValue({ base: false, lg: true });
 
   return (
     <Grid
@@ -34,32 +38,39 @@ function App() {
     >
       <GridItem area="nav">
         <NavBar
-          onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
-        ></NavBar>
+          onSearch={(searchText) =>
+            setGameQuery((prev) => ({ ...prev, searchText }))
+          }
+        />
       </GridItem>
+
       <Show when={isLg}>
         <GridItem area="aside" paddingX={1}>
           <GenreList
-            onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+            onSelectGenre={(genre) =>
+              setGameQuery((prev) => ({ ...prev, genre }))
+            }
             selectedGenre={gameQuery.genre}
-          ></GenreList>
+          />
         </GridItem>
       </Show>
+
       <GridItem area="main" paddingX={10}>
-        <HStack paddingLeft={3} spaceX={5} marginBottom={4}>
+        <HStack paddingLeft={3} marginBottom={4}>
           <PlatformSelector
             onSelectPlatform={(platform) =>
-              setGameQuery({ ...gameQuery, platform })
+              setGameQuery((prev) => ({ ...prev, platform }))
             }
             selectedPlatform={gameQuery.platform}
-          ></PlatformSelector>
+          />
           <SortSelector
             onSelectSortOrder={(sortOrder) =>
-              setGameQuery({ ...gameQuery, sortOrder })
+              setGameQuery((prev) => ({ ...prev, sortOrder }))
             }
             sortOrder={gameQuery.sortOrder}
-          ></SortSelector>
+          />
         </HStack>
+
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>
