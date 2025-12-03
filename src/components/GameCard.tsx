@@ -1,4 +1,4 @@
-import { Card, Heading, HStack, Image, Text, Box } from "@chakra-ui/react";
+import { Card, Heading, HStack, Image, Text } from "@chakra-ui/react";
 import type { Game } from "@/hooks/useGames";
 import PlatformIconList from "./PlatformIconList";
 import CriticScore from "./CriticScore";
@@ -8,7 +8,7 @@ interface Props {
   game?: Game;
 }
 
-const GameCard = ({ game }: { game?: Game }) => {
+const GameCard = ({ game }: Props) => {
   if (!game) {
     // No game at all
     return (

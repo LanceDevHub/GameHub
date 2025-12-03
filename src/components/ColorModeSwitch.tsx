@@ -1,10 +1,4 @@
-import {
-  Text,
-  ClientOnly,
-  IconButton,
-  Skeleton,
-  HStack,
-} from "@chakra-ui/react";
+import { ClientOnly, IconButton, Skeleton } from "@chakra-ui/react";
 import { LuMoon, LuSun } from "react-icons/lu";
 import { useColorMode } from "@/components/ui/color-mode";
 

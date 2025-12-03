@@ -6,7 +6,6 @@ import {
   HStack,
   Image,
   List,
-  ListItem,
   Spinner,
 } from "@chakra-ui/react";
 import type { Genre } from "@/hooks/useGenres";

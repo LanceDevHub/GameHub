@@ -1,4 +1,4 @@
-import { Button, Icon, Menu, MenuItem, Portal } from "@chakra-ui/react";
+import { Button, Icon, Menu, Portal } from "@chakra-ui/react";
 import { HiSortAscending } from "react-icons/hi";
 
 interface Props {
