@@ -1,27 +1,43 @@
-import type { GiPlatform } from "react-icons/gi";
-import { type Game, type Platform } from "../hooks/useGames";
-import { Card, Heading, HStack, Image, Text } from "@chakra-ui/react";
+import { Card, Heading, HStack, Image, Text, Box } from "@chakra-ui/react";
+import type { Game } from "@/hooks/useGames";
 import PlatformIconList from "./PlatformIconList";
 import CriticScore from "./CriticScore";
 import getCroppedImageUrl from "@/services/image-url";
 
 interface Props {
-  game: Game;
+  game?: Game;
 }
 
-const GameCard = ({ game }: Props) => {
+const GameCard = ({ game }: { game?: Game }) => {
+  if (!game) {
+    // No game at all
+    return (
+      <Card.Root>
+        <Card.Body
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="200px"
+        >
+          <Text fontSize="md" color="gray.500">
+            Game not available
+          </Text>
+        </Card.Body>
+      </Card.Root>
+    );
+  }
+
+  // Use your internal template for missing image
   return (
-    // When using overflow hidden it means that we can round up the
-    // upper borders of the picture beacuse its to big for bordering otherwise
     <Card.Root>
-      <Image src={getCroppedImageUrl(game.background_image)}></Image>
+      <Image src={getCroppedImageUrl(game.background_image)} />
       <Card.Body>
-        <Heading fontSize="xl">{game.name}</Heading>
+        <Heading fontSize="xl">{game.name || "Unknown Game"}</Heading>
         <HStack justifyContent="space-between">
           <PlatformIconList
-            platforms={game.parent_platforms.map((p) => p.platform)}
-          ></PlatformIconList>
-          <CriticScore score={game.metacritic}></CriticScore>
+            platforms={game.parent_platforms?.map((p) => p.platform) ?? []}
+          />
+          <CriticScore score={game.metacritic} />
         </HStack>
       </Card.Body>
     </Card.Root>

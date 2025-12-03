@@ -1,9 +1,8 @@
-import useGames, { type Platform } from "@/hooks/useGames";
-import { SimpleGrid, Text } from "@chakra-ui/react";
+import useGames from "@/hooks/useGames";
+import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import type { Genre } from "@/hooks/useGenres";
 import type { GameQuery } from "@/App";
 
 interface Props {
@@ -11,12 +10,12 @@ interface Props {
 }
 
 const GameGrid = ({ gameQuery }: Props) => {
-  const { data, error, isLoading } = useGames(gameQuery);
-  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const { data = [], error, isLoading } = useGames(gameQuery);
+  const skeletons = Array.from({ length: 10 });
 
-  return (
-    <>
-      {error && <Text>{error}</Text>}
+  // 1️⃣ Loading state
+  if (isLoading) {
+    return (
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
         columnGap="4"
@@ -25,20 +24,53 @@ const GameGrid = ({ gameQuery }: Props) => {
         justifyItems="center"
         alignItems="center"
       >
-        {isLoading &&
-          skeletons.map((s) => (
-            <GameCardContainer key={s}>
-              <GameCardSkeleton></GameCardSkeleton>
-            </GameCardContainer>
-          ))}
-
-        {data.map((game) => (
-          <GameCardContainer key={game.id}>
-            <GameCard game={game}></GameCard>
+        {skeletons.map((_, idx) => (
+          <GameCardContainer key={idx}>
+            <GameCardSkeleton />
           </GameCardContainer>
         ))}
       </SimpleGrid>
-    </>
+    );
+  }
+
+  // 2️⃣ Error state
+  if (error) {
+    return (
+      <Box textAlign="center" padding="20px">
+        <Text fontSize="xl" color="red.500">
+          {error}
+        </Text>
+      </Box>
+    );
+  }
+
+  // 3️⃣ No results
+  if (!data || data.length === 0) {
+    return (
+      <Box textAlign="center" padding="20px">
+        <Text fontSize="xl" color="gray.500">
+          No results found
+        </Text>
+      </Box>
+    );
+  }
+
+  // 4️⃣ Normal results
+  return (
+    <SimpleGrid
+      columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
+      columnGap="4"
+      rowGap="10"
+      padding="10px"
+      justifyItems="center"
+      alignItems="center"
+    >
+      {data.map((game) => (
+        <GameCardContainer key={game.id}>
+          <GameCard game={game} />
+        </GameCardContainer>
+      ))}
+    </SimpleGrid>
   );
 };
 

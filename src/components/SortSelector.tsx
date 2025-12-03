@@ -1,7 +1,4 @@
-import type { Platform } from "@/hooks/useGames";
-import usePlatforms from "@/hooks/usePlatforms";
-import { Button, Menu, MenuItem, Portal } from "@chakra-ui/react";
-import { useState } from "react";
+import { Button, Icon, Menu, MenuItem, Portal } from "@chakra-ui/react";
 import { HiSortAscending } from "react-icons/hi";
 
 interface Props {
@@ -16,7 +13,8 @@ const SortSelector = ({ onSelectSortOrder, sortOrder }: Props) => {
     <Menu.Root>
       <Menu.Trigger asChild>
         <Button variant="outline" size="sm" width={185}>
-          <HiSortAscending /> Sort by: {currentSortOrder?.label || "Relevance"}
+          <Icon as={HiSortAscending} /> Sort by:{" "}
+          {currentSortOrder?.label || "Relevance"}
         </Button>
       </Menu.Trigger>
       <Portal>
