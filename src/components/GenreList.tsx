@@ -2,6 +2,7 @@ import useGenres from "@/hooks/useGenres";
 import getCroppedImageUrl from "@/services/image-url";
 import {
   Button,
+  Heading,
   HStack,
   Image,
   List,
@@ -28,27 +29,36 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
     );
 
   return (
-    <List.Root variant="plain">
-      {data.map((g) => (
-        <List.Item key={g.id} paddingY="5px">
-          <HStack>
-            <Image
-              boxSize="45px"
-              borderRadius={8}
-              src={getCroppedImageUrl(g.image_background)}
-            ></Image>
-            <Button
-              onClick={() => onSelectGenre(g)}
-              fontWeight={g.id === selectedGenre?.id ? "bold" : "normal"}
-              fontSize="md"
-              variant="plain"
-            >
-              {g.name}
-            </Button>
-          </HStack>
-        </List.Item>
-      ))}
-    </List.Root>
+    <>
+      <Heading fontSize="2xl" paddingX={10} paddingY={5}>
+        {" "}
+        Genres{" "}
+      </Heading>
+      <List.Root variant="plain">
+        {data.map((g) => (
+          <List.Item key={g.id} paddingY="4px">
+            <HStack>
+              <Image
+                boxSize="50px"
+                borderRadius={15}
+                src={getCroppedImageUrl(g.image_background)}
+                objectFit="cover"
+              ></Image>
+              <Button
+                onClick={() => onSelectGenre(g)}
+                fontWeight={g.id === selectedGenre?.id ? "bold" : "normal"}
+                fontSize="lg"
+                variant="ghost"
+                whiteSpace="normal"
+                paddingX={1}
+              >
+                {g.name}
+              </Button>
+            </HStack>
+          </List.Item>
+        ))}
+      </List.Root>
+    </>
   );
 };
 
