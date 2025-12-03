@@ -27,18 +27,17 @@ const GameCard = ({ game }: { game?: Game }) => {
     );
   }
 
-  // Use your internal template for missing image
   return (
     <Card.Root>
       <Image src={getCroppedImageUrl(game.background_image)} />
       <Card.Body>
-        <Heading fontSize="xl">{game.name || "Unknown Game"}</Heading>
-        <HStack justifyContent="space-between">
+        <HStack justifyContent="space-between" marginBottom={1}>
           <PlatformIconList
             platforms={game.parent_platforms?.map((p) => p.platform) ?? []}
           />
           <CriticScore score={game.metacritic} />
         </HStack>
+        <Heading fontSize="xl">{game.name}</Heading>
       </Card.Body>
     </Card.Root>
   );
