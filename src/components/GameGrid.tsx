@@ -44,17 +44,6 @@ const GameGrid = ({ gameQuery }: Props) => {
     );
   }
 
-  // PlayStation filter warning
-  if (gameQuery.platform?.id === 2 && data.length === 0) {
-    return (
-      <Box textAlign="center" padding="20px">
-        <Text fontSize="xl" color="yellow.500">
-          ⚠️ The API currently does not support PlayStation platform filters.
-        </Text>
-      </Box>
-    );
-  }
-
   // No results
   if (!data || data.length === 0) {
     return (
